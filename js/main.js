@@ -227,7 +227,7 @@ OJoy.effect={
 						aBtn[j].className='';
 					}
 					aBtn[n].className='cur';
-					ulTranslateX=aLi[0].offsetWidth*n;
+					ulTranslateX=-aLi[0].offsetWidth*n;
 					oUl.style.WebkitTransition='.3s all ease';
 					oUl.style.WebkitTransform='translateX('+ulTranslateX+'px)';
 				}
