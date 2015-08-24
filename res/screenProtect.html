@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1">
+	<style type="text/css">
+	* {margin:0; padding:0; list-style:none;}
+	body{background:#000;text-align:center;}
+	html {font-size:20px;}
+	#c1{background:#000;display:block;}
+	</style>
+	<script type="text/javascript">
+	function rnd(n,m){
+		return Math.floor(Math.random()*(m-n)+n);
+	}
+	var oC;
+	window.onload=function(){
+		oC=document.getElementById('c1');
+		window.onresize();
+	}
+	window.onresize=function(){
+		document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';
+		oC.width=document.documentElement.clientWidth;
+		oC.height=document.documentElement.clientHeight;
+	};
+	document.addEventListener('DOMContentLoaded',function(){
+		window.onload();
+		var MAX_SPEED=10;//设置一个最大速度，以便后来的随机取速度
+		var NUM_OF_POINT=5;//默认5个点
+		var NUM_OF_SHADOW=20;//一边线带了20条虚影,即记下了20次上一画5个点的位置
+		var color={//颜色随机的话，直接瞬变，效果不好，所以打算做渐变
+			r:rnd(0,256),
+			g:rnd(0,256),
+			b:rnd(0,256),
+			speedR:Math.random()*4-2,
+			speedG:Math.random()*4-2,
+			speedB:Math.random()*4-2
+		}
+		var gd=oC.getContext('2d');
+
+		// 开始绘图啦
+		//首先	点(x,y,speedX,speedY)
+		var aPoint=[];
+		for(var i=0;i<NUM_OF_POINT;i++){
+			aPoint[i]={x:Math.random()*oC.width,y:Math.random()*oC.height,speedX:Math.random()*MAX_SPEED-MAX_SPEED/2,speedY:Math.random()*MAX_SPEED-MAX_SPEED/2};
+		}
+
+		//影子：可以把重绘前的几次5个点记下来，作为拖着的影子，透明度依次降低的
+		var aShadow=[];
+
+		setInterval(function(){
+			gd.clearRect(0,0,oC.width,oC.height);
+			var a=['r','g','b'];//把要操作的选项记下来，以便color里的大小写切换
+
+			//-----为了得到应显示的当前的颜色
+			for(var i=0;i<a.length;i++){
+				var char=a[i];//当前操作的字符
+				color[char]+=color['speed'+char.toUpperCase()];
+				if(color[char]>255){//方法类似于反弹运动
+					color['speed'+char.toUpperCase()]*=-1;//颜色值从255开始下降
+					color[char]=255;
+				}else if(color[char]<0){
+					color['speed'+char.toUpperCase()]*=-1;//颜色值从255开始下降
+					color[char]=0;
+				}
+			}
+
+			// -----为了得到当前要画的点
+			for(var i=0;i<aPoint.length;i++){
+				aPoint[i].x+=aPoint[i].speedX;
+				aPoint[i].y+=aPoint[i].speedY;
+
+				if(aPoint[i].x<0){//让点遇到边界可以反弹
+					aPoint[i].speedX*=-1;
+					aPoint[i].x=0;
+				}else if(aPoint[i].x>oC.width){
+					aPoint[i].speedX*=-1;
+					aPoint[i].x=oC.width;
+				}
+				if(aPoint[i].y<0){//让点遇到边界可以反弹
+					aPoint[i].speedY*=-1;
+					aPoint[i].y=0;
+				}else if(aPoint[i].y>oC.height){
+					aPoint[i].speedY*=-1;
+					aPoint[i].y=oC.height;
+				}
+			}
+
+			//好了，开始画吧
+			// 画影——在最下层，先画
+			for(var i=0;i<aShadow.length;i++){
+				var arr1=aShadow[i];
+
+				gd.beginPath();
+				gd.moveTo(arr1[0].x,arr1[0].y);
+				for(var j=1;j<arr1.length;j++){
+					gd.lineTo(arr1[j].x,arr1[j].y);
+				}
+				gd.closePath();
+				//颜色值为整数
+				gd.strokeStyle='rgba('+Math.round(color.r)+', '+Math.round(color.g)+', '+Math.round(color.b)+', '+(i+1)/(NUM_OF_SHADOW+1)+')';//透明度先画的要淡些
+				gd.stroke();
+			}
+			// 画点
+			gd.beginPath();
+			gd.moveTo(aPoint[0].x,aPoint[0].y);
+			for(var i=1;i<aPoint.length;i++){
+				gd.lineTo(aPoint[i].x,aPoint[i].y);
+			}
+			gd.closePath();
+			gd.strokeStyle='rgb('+Math.round(color.r)+', '+Math.round(color.g)+', '+Math.round(color.b)+')';
+			gd.stroke();
+
+			//把当前这次的点记下来，作为下一次的影子；如果ashadow数组装满了，就在后补上这次，在前shift弹出以前的一个
+			var arr=[];
+			for(var i=0;i<aPoint.length;i++){
+				arr[i]={x:aPoint[i].x,y:aPoint[i].y};
+			}
+			aShadow.push(arr);
+			if(aShadow.length>NUM_OF_SHADOW){
+				aShadow.shift();
+			}
+
+		},18);
+
+	},false);
+
+
+	</script>
+</head>
+<body>
+	<canvas id="c1"></canvas>
+</body>
+</html>

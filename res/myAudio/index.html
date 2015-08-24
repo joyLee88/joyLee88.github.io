@@ -1,0 +1,57 @@
+<!-- 
+	author:li li
+	data:2015-8-9
+	desc:this is a simple music player
+	progress:1.测试中，现发现不足之处：播放进度条位置计算不对
+			 2.还没有做访问网络加载
+			 3.没有歌词
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>myAudio</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+	<div class="main">
+		<div class="box">
+			<div class="f">
+				<div class="picbox" id="js_progressbox">
+					<canvas id="js_progress" width="200" height="200"></canvas>
+					<div class="pic" id="js_pic"></div>
+				</div>
+				<div class="barbox">
+					<ul>
+						<li class="prevbtn"><img src="img/previous.png"></li>
+						<li class="playbtn"><img src="img/pause.png"></li>
+						<li class="nextbtn"><img src="img/next.png"></li>
+						<li class="volumebtn"><img src="img/audio-high.png"></li>
+						<li class="volumebar"><div class="vbarbox"><div><span></span></div></div></li>
+						<li class="listbtn"><img src="img/menu-2.png"></li>
+					</ul>
+					<div class="intro">
+						<h3 id="js_intro">在木星-<em>朴树</em></h3>
+					</div>
+				</div>
+				<div class="playbox">
+					<strong class="cur">00:00</strong>
+					<div class="playprog"><div><span></span></div></div>
+					<strong class="total">00:00</strong>
+				</div>
+			</div>
+			
+			<div class="t">
+				<a href="javascript:;"><img src="img/shun.png"></a>
+				<ul>
+				</ul>
+				<div class="tbarbox">
+					<span class="tbar"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

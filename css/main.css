@@ -1,0 +1,356 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0;}
+
+html{font-size:20px;}
+
+h1,h2,h3,h4,h5,h6{ margin:0; font-weight:normal; font-size:0.6rem;}
+a{ color:#000; text-decoration:none;}
+a:hover{text-decoration:none;}
+ol,ul,li{ list-style:none; padding:0; margin:0;}
+p{ margin:0;}
+i,em{ font-style:normal;}
+b,strong{ font-weight:normal;}
+a img{ border:none;}
+
+.clearfix:after{ display: block; content: ""; clear: both;}
+.clearfix{ zoom:1;}
+/*以上为基本样式*/
+
+/*整体的壳*/
+.obody{
+	display: block;
+	width:16rem;
+	font-family:'Microsoft Yahei';
+}
+/*page页设置*/
+.comW{
+	width:100%; 
+	overflow: hidden;
+}
+/*第一屏 首页*/
+.headPage{
+	background:url(../img/top_bg.png) no-repeat;
+	background-size:cover;
+	text-align:center;
+	position:relative;
+}
+.centerBox{
+	width:10rem;
+	height:4rem;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-2rem;
+	margin-left:-5rem;
+	text-align:center;
+	line-height:0.5rem;
+	/*-webkit-animation:5s cAni linear forwards infinite;*/
+	
+}
+.centerBox span{
+	position:absolute;
+	width:2rem;
+	height:2rem;
+	top:18%;
+	left:50%;
+	margin-left:-1rem;
+	margin-top:-1rem;
+	border-radius:50%;
+	border:0.1rem solid #D82445;
+	line-height:2rem;
+	text-align: center;
+	background:#D82445;
+}
+.centerBox img{
+	width: 58%;
+}
+.centerBox .txt{
+	width:100%;
+	font-size:0.5rem;
+	color:#fff;
+	position:absolute;
+	bottom:0;
+	text-align: center;
+}
+.centerBox .txt p{
+	text-align: center;
+	margin-top:0.2rem;
+}
+/*导航栏*/
+.navBox{
+	position:fixed;
+	z-index: 100;
+	width:100%;
+	/*height:2.24rem;*/
+	height:2rem;
+	bottom:0rem;
+	left:0;
+}
+/* .navBox .bg{
+	width:100%;
+	height:0.24rem;
+	background:url(../img/navbar-bg.png) repeat-x;
+} */
+.navBox .navbar{
+	width:100%;
+	height:2rem;
+	background:#fff;
+}
+.navBox ul{
+	width:88%;
+	height:2rem;
+	line-height:2rem;
+	margin:0 auto;
+}
+.navBox li{
+	width:18%;
+	height:1.8rem;
+	margin:0.1rem 1% 0.1rem 1%;
+	line-height:1.8rem;
+	text-align:center;
+	float:left;
+	background:#888;
+	border-radius:0.5rem;
+	font-size:0.5rem;
+	cursor:pointer;
+}
+.navBox li.cur{
+	background:#D82445;
+	color:#fff;
+}
+/*同时在底部占用一个同等高度的空间*/
+.box{
+	width:100%;
+	height:2.2rem;
+}
+/*每一屏的题目*/
+.title{
+	width:20%;
+	height:0.6rem;
+	padding:0.2rem;
+	margin:0 auto;
+	font-size:0.8rem;
+	color:#fff;
+}
+
+
+/*第2屏 自我介绍*/
+.aboutPage{
+	height:8rem;
+	background:#D82445;
+	position:relative;
+	-webkit-perspective:40rem;
+}
+.aboutPage ul{
+	width:100%;
+	height:7rem;
+	margin:1rem 0;
+}
+.aboutPage li{
+	float:left;
+	width:7rem;
+	height:7rem;
+	margin-left:0.7rem;
+}
+.aboutPage .pic{
+	-webkit-mask:-webkit-radial-gradient(rgba(0,0,0,1) 38%,rgba(0,0,0,0) 68%);
+}
+.aboutPage img{
+	width:100%;
+}
+.aboutPage .intro{
+	font-size:0.5rem;
+}
+.aboutPage p{margin:0.1rem 0;-text-indent:1rem;color:#333;}
+.aboutPage .b{font-size:1rem;font-family:Arial;color:#fff;}
+
+@-webkit-keyframes rotateShow{
+	0%{-webkit-transform:perspective(40rem) rotateX(0deg) rotateY(0deg);}
+	10%{-webkit-transform:perspective(40rem) rotateX(0deg) rotateY(90deg);}
+	20%{-webkit-transform:perspective(40rem) rotateX(0deg) rotateY(180deg);}
+	30%{-webkit-transform:perspective(40rem) rotateX(0deg) rotateY(270deg);}
+	40%{-webkit-transform:perspective(40rem) rotateX(90deg) rotateY(270deg);}
+	50%{-webkit-transform:perspective(40rem) rotateX(180deg) rotateY(270deg);}
+	60%{-webkit-transform:perspective(40rem) rotateX(270deg) rotateY(270deg);}
+	100%{-webkit-transform:perspective(40rem) rotateX(0deg) rotateY(0deg);}
+}
+.aboutPage .showbox{width: 4rem;height: 4rem;text-align: center;line-height: 4rem;border:1px solid #aaa;color:#fff;font-size: 0.2rem;position: absolute;left:2rem;top:50%;margin-top:-2rem;-webkit-transform-style:preserve-3d;-webkit-transform:perspective(40rem) rotateX(0) rotateY(0);border: none;
+	/*-webkit-animation:1s rotateShow linear forwards inifinite alternate;*/
+	-webkit-animation-name:rotateShow;
+	-webkit-animation-duration:30s;
+	-webkit-animation-timing-function:linear;
+	-webkit-animation-iteration-count:infinite;
+
+}
+.aboutPage .showbox div{width: 4rem;height: 4rem;text-align: center;line-height: 4rem;border:1px solid #aaa;color:#fff;font-size: 0.2rem;position: absolute;opacity:0.8}
+.aboutPage .showbox .f{background: #0066FF;-webkit-transform:translateZ(2rem);}
+.aboutPage .showbox .r{background: #00CC00;-webkit-transform:translateX(2rem) translateZ(0px) rotateY(90deg);}
+.aboutPage .showbox .b{background: #660000;-webkit-transform:translateZ(-2rem) rotateY(180deg);}
+.aboutPage .showbox .l{background: #990066;-webkit-transform:translateX(-2rem) translateZ(0px) rotateY(-90deg);}
+.aboutPage .showbox .t{background: #99FF00;-webkit-transform:translateY(-2rem) translateZ(0px) rotateX(90deg);}
+.aboutPage .showbox .d{background: #CC3300;-webkit-transform:translateY(2rem) translateZ(0px) rotateX(-90deg);}
+
+
+
+
+/*第3屏 技能*/
+.skillsPage{
+	background:#aaa; 
+	height:17rem;
+	font-size:0.3rem;
+}
+.skillChart{
+	width:100%;
+	height:16rem; 
+}
+.skillChart li{
+	width:5rem;
+	height:7rem;
+	margin:0.5rem 0 0.5rem 2rem;
+	float: left;
+}
+.skillChart div{
+	width:5rem;
+	height:5rem;
+	line-height:5rem;
+	text-align:center;
+	position:relative;
+}
+.skillChart span{
+	font-size:1rem;
+}
+.skillChart canvas{
+	position:absolute;
+	top:0;
+	left:0;
+}
+.skillChart h4{
+	text-align:center;
+	color:#555;
+}
+.skillChart p{
+	width:6rem;
+	text-indent:0.3rem;
+	font-size:0.4rem;
+	color:#eee;
+}
+
+
+/*第4屏 项目*/
+.worksPage{
+	background:#262364; 
+	height:19rem;
+}
+.worksBox{
+	width:16rem;
+	height:16rem;
+	position:relative;
+	overflow: hidden;
+}
+.worksCon{
+	width:80rem;
+	height:16rem;
+	position:absolute;
+	top:0;
+	left:0; 
+	-webkit-transition:0.3s all ease;
+}
+.worksTab{
+	width:16rem;
+	height:16rem;
+	float: left;
+}
+.worksTab ul{
+	width:16rem;
+	height:16rem;
+	overflow: hidden;
+}
+.worksTab li{
+	width:6.5rem;
+	height:7rem;
+	margin:1rem 0 0 1rem;
+	float: left;
+	border-radius:0.5rem;
+	-webkit-box-shadow:0.08rem 0.08rem 0.1rem #000;
+	background:#fff;
+}
+.worksTab a{
+	display:block;
+	cursor:pointer;
+	width:5.5rem;
+	height:3.5rem;
+	border:0.5rem solid #fff;
+	border-radius:0.5rem 0.5rem 0 0;
+	overflow: hidden;
+	border-bottom:none;
+	background:#aaa;
+}
+.worksTab img{
+	width:100%;
+	height:100%;
+}
+.worksTab div{
+	width:5.5rem;
+	height:2rem;
+	/*background:#fff;*/
+	border-radius:0 0 0.5rem 0.5rem;
+	padding:0.5rem;
+	overflow: hidden;
+} 
+.worksTab div h4{
+	text-align:center;
+	color:#555;
+	font-size:1rem;
+}
+.worksTab div p{
+	font-size:0.5rem;
+	color:#aaa;
+	text-align:center;
+}
+.worksPage ol{
+	width:6rem;
+	height:1rem;
+	margin:0.5rem auto;
+} 
+.worksPage ol li{
+	width:1rem;
+	height:1rem;
+	background:#fff;
+	border-radius:50%;
+	margin:0rem 0.5rem;
+	float: left;
+}
+.worksPage ol li.cur{
+	background:#D82445;
+	-webkit-box-shadow:0.01rem 0.01rem 0.1rem #000;
+}
+/*第5屏 联系*/
+.footer{
+	height:5rem;
+	background:url(../img/top_bg.png) no-repeat;
+	background-size:cover; 
+}
+.footer ul{
+	width:10rem;
+	height:4rem;
+	margin:0 auto;
+	font-size:0.5rem;
+	color:#fff;
+}
+.footer li{
+	line-height:1rem;
+	height:1rem;
+	margin:0.05rem;
+	padding:0;
+}
+.footer img{
+	width:0.8rem;
+	height:0.8rem;
+	margin:0.1rem;
+	vertical-align:middle;
+}
+.footer .title{
+	color:#fff;
+	font-size:0.68rem;
+}

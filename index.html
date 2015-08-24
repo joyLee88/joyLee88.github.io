@@ -1,47 +1,170 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Joy博客.GitHub.io by joyLee88</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<head>
+	<title>OJoy</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+	<div id="js_body" class="obody">
+		<div id="js_home" class="headPage js_page comW">
+			<div class="centerBox">
+				<span><img src="img/user.png"/></span>
+				<div class="txt">
+					<p>乐观进取 关注新技术 热爱前端开发</p>
+					<p>一切为做一个优雅的前端工程师</p>
+				</div>
+			</div>
+		</div>
+		<div id="js_navbox" class="navBox">
+			<!-- <div class="bg"></div> -->
+			<div class="navbar">
+				<ul class="clearfix">
+					<li class="cur">首页</li>
+					<li>关于我</li>
+					<li>我的技能</li>
+					<li>我的项目</li>
+					<li>联系我</li>
+				</ul>
+			</div>
+		</div>
+		<div id="js_about" class="aboutPage comW">
+			<div class="title">ABOUT</div>
+			<ul class="clearfix">
+				<li class="pic">
+					<!-- <img src="img/1.jpg"> -->
+				</li>
+				<li class="intro">
+					<p class="b">Hey!</p>
+					<p> 前端工程师 李藜 </p>
+					<dl>
+						<dd>年龄：25</dd>
+						<dd>毕业学校：华中师范大学</dd>
+						<dd>专业：数字媒体技术</dd>
+						<dd>工作经验：2年</dd>
+					</dl>
+				</li>
+			</ul>
 
-  </head>
-  <body>
-
-      <header>
-        <h1>Joy博客.GitHub.io</h1>
-        <p>joy的博客</p>
-      </header>
-
-      <div id="banner">
-        <span id="logo"></span>
-
-        <a href="https://github.com/joyLee88" class="button fork"><strong>View On GitHub</strong></a>
-      </div><!-- end banner -->
-
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
-        <h1>
-<a id="joylee88githubio" class="anchor" href="#joylee88githubio" aria-hidden="true"><span class="octicon octicon-link"></span></a>joyLee88.github.io</h1>
-
-<p>joy的博客</p>
-      </section>
-      <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
-      </footer>
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
-  </body>
+			<div class="showbox" id="js_showbox">
+				<div class="f">1-HTML5</div>
+				<div class="b">3-JavaScript</div>
+				<div class="l">2-CSS3</div>
+				<div class="r">4-Jquery</div>
+				<div class="t">6-sea.js</div>
+				<div class="d">5-angularjs</div>
+			</div>
+		</div>
+		<div id="js_skill" class="skillsPage comW">
+			<div class="title">SKILLS</div>
+			<div>
+				
+			</div>
+			<ul class="skillChart clearfix">
+				<li>
+					<div>
+						<span class="percent">0%</span>
+						<canvas id="js_javascript"></canvas>
+					</div>
+					<h4>JavaScript</h4>
+					<p>熟悉原生javascript、ajax和jsonp，模块化，面向对象，mvc三层分离(angularJS)及YUI</p>
+				</li>
+				<li>
+					<div>
+						<span class="percent">0%</span>
+						<canvas id="js_jqr"></canvas>
+					</div>
+					<h4>jQuery</h4>
+					<p>了解jQuery源码，并熟练使用jQuery编写项目程序</p>
+				</li>
+				<li>
+					<div>
+						<span class="percent">0%</span>
+						<canvas id="js_h5"></canvas>
+					</div>
+					<h4>HTML5/CSS3</h4>
+					<p>熟悉htm5及css3，移动端网页开发的相关知识</p>
+				</li>
+				<li>
+					<div>
+						<span class="percent">0%</span>
+						<canvas id="js_back"></canvas>
+					</div>
+					<h4>NodeJS/PHP</h4>
+					<p>了解并能够编写后台语言</p>
+				</li>
+			</ul>
+		</div>
+		<div id="js_work" class="worksPage comW">
+			<div class="title">WORKS</div>
+			
+			<div class="worksBox" id="js_worksbox">
+				<ul class="worksCon clearfix">
+					<li class="worksTab">
+						<ul class="clearfix">
+							<li>
+								<a href="javascript:;">
+									<img src="img/xiao1.jpg">
+								</a>
+								<div>
+									<h4>屏保</h4>
+									<p>关键词:canvas</p>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="img/xiao2.png">
+								</a>
+								<div>
+									<h4>时钟</h4>
+									<p>关键词:CSS3</p>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="img/xiao3.jpg">
+								</a>
+								<div>
+									<h4>音乐盒</h4>
+									<p>关键词:html5 Css3</p>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="img/xiao4.jpg">
+								</a>
+								<div>
+									<h4>图片展示</h4>
+									<p>关键词:面向对象 CSS3</p>
+								</div>
+							</li>
+						</ul>
+					</li>
+					<li  class="worksTab" style="background:#f33;">
+						
+					</li>
+					<li  class="worksTab" style="background:#0fa;">
+						
+					</li>
+				</ul>
+			</div>
+			<ol>
+				<li class="cur"></li>
+				<li></li>
+				<li></li>
+			</ol>
+		</div>
+		<div id="js_contact" class="footer comW">
+			<div class="title">CONTACT</div>
+			<ul>
+				<li>联系电话:	18618127851</li>
+				<li>邮件地址:	lily092388@163.com</li>
+				<li>地址: 北京市朝阳区</li>
+			</ul>
+		</div>
+		<div class="box"></div>
+	</div>
+</body>
 </html>
