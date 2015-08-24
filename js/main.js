@@ -203,11 +203,11 @@ OJoy.effect={
 				}else{
 					if(dir=='rl'){
 						ulTranslateX=mx-disX;
-						if(ulTranslateX<aLi[0].offsetWidth*(aLi.length-1)){
+						/*if(ulTranslateX<aLi[0].offsetWidth*(aLi.length-1)){
 							ulTranslateX=aLi[0].offsetWidth*(aLi.length-1);
 						}else if(ulTranslateX>0){
 							ulTranslateX=0;
-						}
+						}*/
 						oUl.style.WebkitTransform='translateX('+ulTranslateX+'px)';
 					}
 				}
