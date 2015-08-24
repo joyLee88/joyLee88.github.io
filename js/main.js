@@ -183,12 +183,13 @@ OJoy.effect={
 		var oUl=oBox.children[0];
 		var aLi=oUl.children;
 		var ulTranslateX=0;
-		var dir='';
+		
 		oUl.addEventListener('touchstart',function(ev){
 			var x=ev.targetTouches[0].pageX;
 			var y=ev.targetTouches[0].pageY;
 			var disX=x-ulTranslateX;
 			oUl.style.WebkitTransition='none';
+			var dir='';
 			function move(){
 				var mx=ev.targetTouches[0].pageX;
 				var my=ev.targetTouches[0].pageY;
@@ -217,7 +218,7 @@ OJoy.effect={
 						n=aLi.length-1;
 					}
 					ulTranslateX=aLi[0].offsetWidth*n;
-					oUl.style.WebkitTransition='.2 all ease';
+					oUl.style.WebkitTransition='.2s all ease';
 					oUl.style.WebkitTransform='translateX('+ulTranslateX+'px)';
 				}
 			}
