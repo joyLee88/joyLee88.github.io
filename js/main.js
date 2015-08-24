@@ -197,17 +197,17 @@ OJoy.effect={
 				if(!dir){
 					if(Math.abs(x-mx)>=3){
 						dir='rl';
-					}else{
+					}else if(Math.abs(y-my)>=3){
 						dir='ud';
 					}
 				}else{
 					if(dir=='rl'){
 						ulTranslateX=mx-disX;
-						/*if(ulTranslateX<aLi[0].offsetWidth*(aLi.length-1)){
-							ulTranslateX=aLi[0].offsetWidth*(aLi.length-1);
+						if(ulTranslateX<-aLi[0].offsetWidth*(aLi.length-1)){
+							ulTranslateX=-aLi[0].offsetWidth*(aLi.length-1);
 						}else if(ulTranslateX>0){
 							ulTranslateX=0;
-						}*/
+						}
 						oUl.style.WebkitTransform='translateX('+ulTranslateX+'px)';
 					}
 				}
@@ -220,13 +220,13 @@ OJoy.effect={
 					var n=Math.round(ulTranslateX/aLi[0].offsetWidth);
 					if(n>=0){
 						n=0;
-					}else if(n<=aLi.length-1){
-						n=aLi.length-1;
+					}else if(n<=-(aLi.length-1)){
+						n=-(aLi.length-1);
 					}
 					for(var j=0;j<aBtn.length;j++){
 						aBtn[j].className='';
 					}
-					aBtn[n].className='cur';
+					aBtn[-n].className='cur';
 					ulTranslateX=-aLi[0].offsetWidth*n;
 					oUl.style.WebkitTransition='.3s all ease';
 					oUl.style.WebkitTransform='translateX('+ulTranslateX+'px)';
