@@ -53,15 +53,17 @@ OJoy.effect={
 		document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';
 		var oPage=document.querySelector('.js_page');
 		oPage.style.height=document.documentElement.clientHeight+'px';
+		var oBodyBox=document.querySelector('#js_bodyBox');
+		oBodyBox.style.width=document.documentElement.clientWidth+'px';
+		oBodyBox.style.height=document.documentElement.clientHeight+'px';
 	},
 	/*---1
 	*	@desc: scroll to the computed target location
 	*/
-	timer:null,
-	bScrl:false,
 	locatePage:function(){
 		var aLi=document.querySelectorAll('#js_navbox .navbar ul li');
 		var aPages=['js_home','js_about','js_skill','js_work','js_contact'];
+		var oNav=document.querySelector('#js_navbox');
 		
 		for(var i=0;i<aLi.length;i++){
 			
@@ -72,10 +74,14 @@ OJoy.effect={
 					}
 					aLi[index].className='cur';
 					var oTarget=document.getElementById(aPages[index]);
-
-					var t=OJoy.util.getPos(oTarget).top;
-
-					OJoy.effect.toMove(t);
+					var t=oTarget.offsetTop;
+					// specially deal with the contact top
+					if(index==aLi.length-1){
+						t=t-(document.documentElement.clientHeight-oTarget.offsetHeight-oNav.offsetHeight);
+					}
+					var oBody=document.getElementById('js_body');
+					oBody.style.WebkitTransform='translateY('+OJoy.effect.pageTranslateY+'px)';
+					OJoy.effect.toMove(-t);
 				},false);
 			})(i);
 		}
@@ -84,22 +90,14 @@ OJoy.effect={
 	*	@desc: move to the target position 
 	*	@param:  {Numeber}
 	*/
-	toMove:function(iTarget){	
-		var start=document.documentElement.scrollTop||document.body.scrollTop;
-		var dis=iTarget-start;
+	toMove:function(iTarget){
+		var oBody=document.getElementById('js_body');
+		setTimeout(function(){
+			oBody.style.WebkitTransition='1s all ease';
+			oBody.style.WebkitTransform='translateY('+iTarget+'px)';
+		},0);
 		
-		clearInterval(OJoy.effect.timer);
-		var count=Math.floor(1000/30);
-		var n=0;
-		OJoy.effect.timer=setInterval(function(){
-			OJoy.effect.bScrl=false;
-			n++;
-			var a=1-n/count;
-			document.documentElement.scrollTop=document.body.scrollTop=start+dis*(1-Math.pow(a,3));
-			if(n==count){
-				clearInterval(OJoy.effect.timer);
-			}
-		},30);
+		OJoy.effect.pageTranslateY=iTarget;
 	},
 	/*---2
 	*	@desc: controll the cubic 
@@ -175,67 +173,84 @@ OJoy.effect={
 		}
 	},
 	/*---4
-	*	@desc: change tabs 
+	*	@desc: swap the screen by x and y 
 	*	@param:  {}
 	*/
-	changeTabs:function(){
-		var oBox=document.getElementById('js_worksbox');
+	pageTranslateY:0,//changed also in toMove(function)
+	swapScreen:function(){
+		var oBody=document.getElementById('js_body');//the content of the body---y
+
+		var oBox=document.getElementById('js_worksbox');//the tabs---x
 		var oUl=oBox.children[0];
 		var aLi=oUl.children;
-		var aBtn=document.getElementById('js_workbtns');
+		var aBtn=document.getElementById('js_workbtns').children;
 		var ulTranslateX=0;
 		
-		oUl.addEventListener('touchstart',function(ev){
+		document.addEventListener('touchstart',function(ev){
 			var x=ev.targetTouches[0].pageX;
 			var y=ev.targetTouches[0].pageY;
 			var disX=x-ulTranslateX;
+			var disY=y-OJoy.effect.pageTranslateY;
+
 			oUl.style.WebkitTransition='none';
+			oBody.style.WebkitTransition='none';
+
 			var dir='';
+			
 			function move(ev){
 				var mx=ev.targetTouches[0].pageX;
 				var my=ev.targetTouches[0].pageY;
+
 				if(!dir){
-					if(Math.abs(x-mx)>=3){
-						dir='rl';
-					}else if(Math.abs(y-my)>=3){
+					if(Math.abs(my-y)>=3){//once swap by y, you can't swap by x 
 						dir='ud';
+					}else if(Math.abs(mx-x)>=3){
+						dir='rl';
 					}
 				}else{
-					if(dir=='rl'){
+
+					if(dir=='ud'){
+						OJoy.effect.pageTranslateY=my-disY;
+						(OJoy.effect.pageTranslateY>=0) && (OJoy.effect.pageTranslateY=0);
+
+						(OJoy.effect.pageTranslateY<=document.documentElement.clientHeight-oBody.offsetHeight) && (OJoy.effect.pageTranslateY=document.documentElement.clientHeight-oBody.offsetHeight);
+	
+						oBody.style.WebkitTransform='translateY('+OJoy.effect.pageTranslateY+'px)';
+					}else if(dir=='rl'){
 						ulTranslateX=mx-disX;
-						if(ulTranslateX<-aLi[0].offsetWidth*(aLi.length-1)){
-							ulTranslateX=-aLi[0].offsetWidth*(aLi.length-1);
-						}else if(ulTranslateX>0){
-							ulTranslateX=0;
-						}
+						(ulTranslateX<-aLi[0].offsetWidth*(aLi.length-1)) && (ulTranslateX=-aLi[0].offsetWidth*(aLi.length-1));
+						(ulTranslateX>0) && (ulTranslateX=0);
+						
 						oUl.style.WebkitTransform='translateX('+ulTranslateX+'px)';
 					}
 				}
 			}
 			function end(){
-				oUl.removeEventListener('touchmove',move,false);
-				oUl.removeEventListener('touchend',end,false);
+				document.removeEventListener('touchmove',move,false);
+				document.removeEventListener('touchend',end,false);
 
-				if(dir=='rl'){
-					var n=Math.round(ulTranslateX/aLi[0].offsetWidth);
-					if(n>=0){
+				if(dir=='ud'){
+
+				}else if (dir=='rl') {
+					var n=-Math.round(ulTranslateX/aLi[0].offsetWidth);
+					if(n<=0){
 						n=0;
-					}else if(n<=-(aLi.length-1)){
-						n=-(aLi.length-1);
+					}else if(n>=(aLi.length-1)){
+						n=(aLi.length-1);
 					}
 					for(var j=0;j<aBtn.length;j++){
 						aBtn[j].className='';
 					}
-					aBtn[-n].className='cur';
+					aBtn[n].className='cur';
 					ulTranslateX=-aLi[0].offsetWidth*n;
-					oUl.style.WebkitTransition='.3s all ease';
+					oUl.style.WebkitTransition='.5s all ease';
 					oUl.style.WebkitTransform='translateX('+ulTranslateX+'px)';
 				}
 			}
+			document.addEventListener('touchmove',move,false);
+			document.addEventListener('touchend',end,false);
 			ev.preventDefault();
-			oUl.addEventListener('touchmove',move,false);
-			oUl.addEventListener('touchend',end,false);
-		},false);
+		},false); 
 	}
 };
 
@@ -255,26 +270,26 @@ OJoy.effect={
 		//2.rotate the cubic
 		OJoy.effect.contrlCubic();
 
-		var bOnce=false;//make sure to draw charts once time
-		global.onscroll=function(){
-			if (OJoy.effect.bScrl) {//can stop while scrolling
-				clearInterval(OJoy.effect.timer);
-			};
-			OJoy.effect.bScrl=true;
-
-			var scrollT=document.documentElement.scrollTop||document.body.scrollTop;
-			var drawPage=document.getElementById('js_skill');
-			var drawT=OJoy.util.getPos(drawPage).top;
-
-			if(bOnce==false && scrollT>=drawT-150){
 		//3.draw chart of skills
-				OJoy.effect.drawChart();
-				bOnce=true;
+		var bOnce=false;//make sure to draw charts once time
+		var timer=null;
+		var drawPage=document.getElementById('js_skill');
+		var drawT=drawPage.offsetTop;
+
+		timer=setInterval(function(){
+
+			if(bOnce==false){
+				if(OJoy.effect.pageTranslateY<=-drawT){
+					OJoy.effect.drawChart();
+					bOnce=true;
+				}
+			}else if(bOnce==true){
+				clearInterval(timer);
 			}
-		};
+		},3000);
 
 		// 4. change the 'WORKS' tabs
-		OJoy.effect.changeTabs();
+		OJoy.effect.swapScreen();
 
 		
 	},false);

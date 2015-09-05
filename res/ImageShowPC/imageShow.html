@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css" >
+	<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+	<p class="txt">* 请尽量在chrome/火狐浏览器下查看这些效果！<br><span>3D滑动</span></p>
+	<ol>
+		<li><span>图片展示效果1:3D滑动</span></li>
+		<li><span>图片展示效果2:多图单页</span></li>
+		<li><span>图片展示效果3:翻页</span></li>
+		<li><span>图片展示效果4:爆破</span></li>
+		<li><span>图片展示效果5:颗粒翻转</span></li>
+		<li><span>图片展示效果6:3D图片环</span></li>
+	</ol>
+	<div id="js_slidebox" class="box slidebox">
+		<a class="prev" href="javascript:;">prev</a>		
+		<a class="next" href="javascript:;">next</a>
+		<ul>
+			<li class="l2">
+				<img src="img/s1.jpg">
+				<img src="img/s1.jpg" class="shadimg">
+			</li>
+			<li class="l1">
+				<img src="img/s2.jpg">
+				<img src="img/s2.jpg" class="shadimg">
+			</li>
+			<li class="cur">
+				<img src="img/s3.jpg">
+				<img src="img/s3.jpg" class="shadimg">
+			</li>
+			<li class="r1">
+				<img src="img/s4.jpg">
+				<img src="img/s4.jpg" class="shadimg">
+			</li>
+			<li class="r2">
+				<img src="img/s5.jpg">
+				<img src="img/s5.jpg" class="shadimg">
+			</li>
+		</ul>
+	</div>
+	<div class="box morepicbox">
+		<ul>
+			<li><img src="img/m1.jpg"></li>
+			<li><img src="img/m2.jpg"></li>
+			<li><img src="img/m3.jpg"></li>
+			<li><img src="img/m4.jpg"></li>
+			<li><img src="img/m5.jpg"></li>
+			<li><img src="img/m6.jpg"></li>
+			<li><img src="img/m7.jpg"></li>
+			<li><img src="img/m8.jpg"></li>
+			<li><img src="img/m9.jpg"></li>
+		</ul>
+	</div>
+	<div id="js_pagebox" class="box pagebox">
+		<div class="page1">
+			<span class="front"></span>
+			<span class="back"></span>
+		</div>
+		<div class="page2"></div>
+	</div>
+	<div id="js_explodebox" class="box explodebox">
+	</div>
+	<div id="js_cubicbox" class="box cubicbox">
+	</div>
+	<div class="box circlebox">
+		<div id="js_circlebox" class="picbox"></div>
+	</div>
+</body>
+</html>

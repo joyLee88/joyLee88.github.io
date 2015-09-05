@@ -1,0 +1,80 @@
+*{margin:0; padding:0;list-style:none;}
+html{font-size:20px;background:#111;}
+.txt{margin:0.5rem auto;color:#f33;font-size:1rem;text-align:center;}
+.txt span{color:#fff;font-size:1.4rem;}
+ol{height:2rem;position:absolute;top:0;left:0;}
+ol li{height:1.5rem;margin:0.25rem 0;text-align:left;line-height:1.5rem;color:orange;position:relative;}
+ol span{padding:0.25rem 0.25rem;color:#fff;height:1rem;-webkit-transition:1s all ease;line-height:1rem;cursor: pointer;-webkit-transform:scale(1,1);background:#900;}
+ol span:hover{-webkit-transform:translateX(0.4rem) scale(1.1,1.1);box-shadow:0.1rem 0.1rem 0.05rem #888;color:#900;font-weight:bold;background:#fff;}
+
+.box{width:35rem;height:20rem;position:absolute;top:50%;left:50%;margin-top:-10rem;margin-left:-17.5rem;-border:0.05rem solid #aaa;display:none;}
+a{text-decoration:none;}
+.box .prev{border-radius:0.25rem 0 0 0.25rem;z-index:10;width:5rem;height:1.9rem;line-height:1.5rem;text-align:center;background:#fff;box-shadow:0.1rem 0px 0.1rem #fff;position:absolute;top:50%;left:-5rem;margin-top:-1rem;font-size:1.9rem;color:#333;-webkit-transition:.5s all ease;}
+.box .next{border-radius:0 0.25rem 0.25rem 0;z-index:10;width:5rem;height:1.9rem;line-height:1.5rem;text-align:center;background:#fff;box-shadow:0.1rem 0px 0.1rem #fff;position:absolute;top:50%;right:-5rem;margin-top:-1rem;font-size:1.9rem;color:#333;-webkit-transition:.5s all ease;}
+.box .prev:hover,.box .next:hover{background:#900;color:#fff;box-shadow:0.1rem 0px 0.1rem #900;}
+
+/************* 效果1 */
+.slidebox{display:block;}
+.slidebox ul{width:15rem;height:7.5rem;position:absolute;top:20%;left:50%;margin-left:-7.5rem;-margin-top:-3.75rem;}
+	/*默认所有图片都在同一位置，即中间，只是看似移动了拥有class的li*/
+.slidebox li{position:absolute;top:0;left:0;width:15rem;height:7.5rem;opacity:0;z-index:2;-webkit-transition:.5s all ease;}
+.slidebox li  img{width:15rem;height:7.5rem;}
+	/*设计每个阴影，且每个图片准备旋转，就要有初始值*/
+.slidebox li .shadimg{-webkit-mask:-webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.6));opacity:0.5;-webkit-transform:perspective(40rem) rotateY(0deg) scale(1,-1);}
+	/*当前图片透明度最高，再往两边扩散，设置当前铺开展示的是5张图片，只是最边上两个透明度为0等待着*/
+.slidebox .cur{opacity:1;z-index: 5;}
+.slidebox .l1,.slidebox .r1{opacity:0.5;z-index:4}
+.slidebox .l1{-webkit-transform:perspective(40rem) translateX(10rem) rotateY(-60deg);}
+.slidebox .l2{-webkit-transform:perspective(40rem) translateX(15rem) rotateY(-60deg);}
+.slidebox .l2,.slidebox .r2{opacity:0;z-index:3;}
+.slidebox .r1{-webkit-transform:perspective(40rem) translateX(-10rem) rotateY(60deg);}
+.slidebox .r2{-webkit-transform:perspective(40rem) translateX(-15rem) rotateY(60deg);}
+
+/************* 效果2 */
+.morepicbox ul{width:19.5rem;zoom:1;width:17rem;height:13.25rem;border:0.25rem solid #fff;position:absolute;top:50%;left:50%;margin-left:-8.5rem;margin-top:-6.6rem;}
+.morepicbox ul:after{content:'';display:block;clear:both;}
+.morepicbox li{width:5rem;height:3.75rem;float: left;margin:0.5rem 0 0 0.5rem;z-index:1;-webkit-transition:.5s all ease;}
+.morepicbox li:hover{-webkit-transform:rotate(360deg) scale(2);z-index:2;}
+.morepicbox img{width:100%;}
+
+/************* 效果3 */
+/* 
+1)pagebox 100% 背景图为0.jpg全图;
+ 子page1 50%宽度 定位right:0 
+ 	子span作为正面	背景图为0.jpg右半部分 ——与box左背景合成一张图 
+ 	子span作为背面	背景图为1.jpg左半部分;
+ 子page2 50%宽度 同样定位right:0 背景图为1.jpg右半部分——与上面背面合成一张图; 
+
+ 即page1旋转运动
+ */
+.pagebox{background:url(../img/b0.jpg) no-repeat;border:0.1rem solid #fff;-webkit-perspective:40rem;}
+/*父级有了perspective，父级的父级也要看起来要有3d效果*/
+.pagebox .page1{z-index:3;width:50%;height:100%;position:absolute;top:0;right:0;-webkit-transform-origin:left center;-webkit-transform-style:preserve-3d;-webkit-transition:1s all ease;}
+.pagebox span{width:100%;height:100%;position:absolute;left:0;top:0;}
+.pagebox .front{background:url(../img/b0.jpg) no-repeat;background-position:right top;-webkit-transform:translateZ(1px);}
+.pagebox .back{background:url(../img/b1.jpg) no-repeat;background-position:left top;-webkit-transform:translateZ(-.1px) scale(-1,1);}
+.pagebox .page2{z-index:2;width:50%;height:100%;position:absolute;top:0;right:0;background:url(../img/b1.jpg);background-position:right top;}
+
+/************* 效果4 */
+/* 1)box背景图为下一张图片，生成的span覆盖在上面 */
+.explodebox{background:url(../img/b1.jpg) no-repeat;border:0.1rem solid #fff}
+.explodebox span{position:absolute;background:url(../img/b0.jpg) no-repeat;}
+
+/************* 效果5 */
+/* 1)需要看到图片的翻转 */
+.cubicbox{-webkit-perspective:40rem;border:0.1rem solid #fff;}
+/*span有正反两面*/
+.cubicbox span{position:absolute;-webkit-transform-style:preserve-3d;}
+.cubicbox span em{position:absolute;width:100%;height:100%;left:0;top:0;}
+.cubicbox span em.front{background:url(../img/b0.jpg) no-repeat;-webkit-transform:translateZ(1px);}
+.cubicbox span em.back{background:url(../img/b1.jpg) no-repeat;-webkit-transform:translateZ(-.1px) scale(-1,1);}
+
+
+/************* 效果6 */
+.circlebox{-webkit-perspective:75rem;overflow:none;}
+.circlebox .picbox{width:6.65rem;height:10rem;background:#ccc;position:absolute;left:50%;margin-left:-3.25rem;top:5rem;-webkit-transform:perspective(75rem) rotateX(-10deg);-webkit-transform-style:preserve-3d;}
+	/*picbox里每一个图片div*/
+.circlebox .picbox div{width:100%;height:100%;position:absolute;left:0;top:0;background:url(img/1.jpg) no-repeat;border-radius:8px;box-shadow:0 0 0.5rem 0.15rem #fff;}
+	/*div里的span倒影*/
+.circlebox .picbox span{width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform:translateY(0.75rem) scale(1,-1);-webkit-transform-origin:bottom center;-webkit-mask:-webkit-linear-gradient(rgba(0,0,0,0) 40%,rgba(0,0,0,1));opacity:0.4;border-radius:0.4rem;box-shadow:0 0 0.5rem 0.15rem #fff;}
+
